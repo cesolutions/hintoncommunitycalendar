@@ -18,7 +18,7 @@
               <a
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
+                @click="menuClick(item.name)"
                 :class="[
                   item.current
                     ? 'bg-gray-200 text-gray-900'
@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from "vue";
 import {
   Dialog,
@@ -92,19 +92,33 @@ import {
   MagnifyingGlassIcon,
   PhoneIcon,
 } from "@heroicons/vue/20/solid";
-// import companyDirectory from "./companyDirectory.vue";
 
-const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: false },
-  {
-    name: "Directory",
-    href: "#",
-    icon: MagnifyingGlassCircleIcon,
-    current: true,
+export default {
+  data() {
+    return {
+      navigation: [
+        { name: "Home", href: "#", icon: HomeIcon, current: false },
+        {
+          name: "Directory",
+          href: "#",
+          icon: MagnifyingGlassCircleIcon,
+          current: true,
+        },
+        { name: "Map", href: "#", icon: MapIcon, current: false },
+      ],
+      secondaryNavigation: [
+        { name: "Want to help?", href: "#", icon: LifebuoyIcon },
+      ],
+      page: "test",
+    };
   },
-  { name: "Map", href: "#", icon: MapIcon, current: false },
-];
-const secondaryNavigation = [
-  { name: "Want to help?", href: "#", icon: LifebuoyIcon },
-];
+  methods: {
+    menuClick(pageName) {
+      //emit the menu selection to the parent component, so the page can be changed.
+      console.log(pageName);
+      this.$emit("menuChange", pageName);
+      this.page = "test2";
+    },
+  },
+};
 </script>
