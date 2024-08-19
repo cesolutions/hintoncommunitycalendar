@@ -26,7 +26,6 @@
       <button
         type="button"
         class="inline-flex justify-center rounded-md bg-white px-3 py-2 text-gray-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        @click="testfunc()"
       >
         <FunnelIcon class="h-5 w-5" aria-hidden="true" />
         <span class="sr-only">Search</span>
@@ -309,10 +308,4 @@ const directory = {
     },
   ],
 };
-let test = "tas";
-
-function testfunc() {
-  test = "other";
-  console.log(test);
-}
 </script>
