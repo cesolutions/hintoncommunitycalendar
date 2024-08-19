@@ -3,12 +3,15 @@
     <!-- Static sidebar for desktop -->
     <Menu @menuChange="onMenuChange" />
 
-    <div>
+    <div v-if="state.activePage == 'Home'">
       <Home />
     </div>
 
     <!--This is the company directory pages.-->
-    <div class="flex min-w-0 flex-1 flex-col overflow-hidden">
+    <div
+      v-show="state.activePage == 'Directory'"
+      class="flex min-w-0 flex-1 flex-col overflow-hidden"
+    >
       <div class="relative z-0 flex flex-1 overflow-hidden">
         <main
           class="relative z-0 flex-1 overflow-y-auto focus:outline-none xl:order-last"
@@ -23,8 +26,12 @@
       </div>
     </div>
 
-    <div>
+    <div v-show="state.activePage == 'Map'">
       <h1>Map page</h1>
+    </div>
+
+    <div v-show="state.activePage == 'Want to help?'">
+      <h1>Help page</h1>
     </div>
   </div>
 </template>
@@ -34,33 +41,14 @@ import Menu from "./components/menu.vue";
 import CompanyDirectory from "./components/companyDirectory.vue";
 import CompanyDetail from "./components/companyDetail.vue";
 import Home from "./components/home.vue";
-</script>
+import { defineComponent, reactive } from "vue";
 
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  setup() {
-    let activePage = "Home";
-    return { activePage };
-  },
-  // components: {
-  //   Menu,
-  //   CompanyDirectory,
-  //   CompanyDetail,
-  //   Home,
-  // },
-  // data() {
-  //   return {
-  //     activePage: "Directory",
-  //   };
-  // },
-  // methods: {
-  //   onMenuChange(pageName) {
-  //     console.log(`Parent: ${pageName}`);
-  //     //update the active page variable and change the page.
-  //     this.activePage == "test";
-  //   },
-  // },
+const state = reactive({
+  activePage: "Directory",
 });
+
+function onMenuChange(selectedPage) {
+  console.log(`Parent: ${selectedPage}`);
+  state.activePage = selectedPage;
+}
 </script>

@@ -45,7 +45,7 @@
               <a
                 v-for="item in secondaryNavigation"
                 :key="item.name"
-                :href="item.href"
+                @click="menuClick(item.name)"
                 class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               >
                 <component
@@ -63,8 +63,8 @@
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
+<script setup>
+import { ref, reactive } from "vue";
 import {
   Dialog,
   DialogPanel,
@@ -93,32 +93,29 @@ import {
   PhoneIcon,
 } from "@heroicons/vue/20/solid";
 
-export default {
-  data() {
-    return {
-      navigation: [
-        { name: "Home", href: "#", icon: HomeIcon, current: false },
-        {
-          name: "Directory",
-          href: "#",
-          icon: MagnifyingGlassCircleIcon,
-          current: true,
-        },
-        { name: "Map", href: "#", icon: MapIcon, current: false },
-      ],
-      secondaryNavigation: [
-        { name: "Want to help?", href: "#", icon: LifebuoyIcon },
-      ],
-      page: "test",
-    };
+const emit = defineEmits(["menuChange"]);
+
+const navigation = [
+  { name: "Home", href: "#", icon: HomeIcon, current: false },
+  {
+    name: "Directory",
+    href: "#",
+    icon: MagnifyingGlassCircleIcon,
+    current: true,
   },
-  methods: {
-    menuClick(pageName) {
-      //emit the menu selection to the parent component, so the page can be changed.
-      console.log(pageName);
-      this.$emit("menuChange", pageName);
-      this.page = "test2";
-    },
-  },
-};
+  { name: "Map", href: "#", icon: MapIcon, current: false },
+];
+const secondaryNavigation = [
+  { name: "Want to help?", href: "#", icon: LifebuoyIcon },
+];
+const state = reactive({
+  page: "",
+});
+
+function menuClick(pageName) {
+  //emit the menu selection to the parent component, so the page can be changed.
+  state.page = pageName;
+  console.log(`Child: ${state.page}`);
+  emit("menuChange", state.page);
+}
 </script>
