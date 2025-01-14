@@ -30,6 +30,10 @@
       <h1>Map page</h1>
     </div>
 
+    <div v-show="state.activePage == 'Community Calendar'">
+      <CommunityCalendar />
+    </div>
+
     <div v-show="state.activePage == 'Want to help?'">
       <h1>Help page</h1>
     </div>
@@ -40,6 +44,7 @@
 import Menu from "./components/menu.vue";
 import CompanyDirectory from "./components/companyDirectory.vue";
 import CompanyDetail from "./components/companyDetail.vue";
+import CommunityCalendar from "./components/communityCalendar.vue";
 import Home from "./components/home.vue";
 import { defineComponent, reactive } from "vue";
 

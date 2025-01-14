@@ -104,6 +104,7 @@ const navigation = [
     current: true,
   },
   { name: "Map", href: "#", icon: MapIcon, current: false },
+  { name: "Community Calendar", href: "#", icon: CalendarIcon, current: false },
 ];
 const secondaryNavigation = [
   { name: "Want to help?", href: "#", icon: LifebuoyIcon },
